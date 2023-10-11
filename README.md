@@ -49,6 +49,9 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ## Contributing
 
+## DIAGRAMA DE BASE DE DATOS MER
+https://lucid.app/lucidchart/39760dd8-431b-4868-a449-3b4237a9dfac/edit?viewport_loc=-775%2C-399%2C2219%2C1047%2C0_0&invitationId=inv_c3ca506a-f95e-43cd-a8fd-2a2ff7a30475
+
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
 ## Code of Conduct
