@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProducategoController;
 use App\Http\Controllers\ProductoController;
+use App\Models\Pedido;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,4 +28,6 @@ Route::resource('categoria',CategoriaController::class);
 Route::resource('producatego',ProducategoController::class);
 
 Route::view('/',"home");
+
+
 

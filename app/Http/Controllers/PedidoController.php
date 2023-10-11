@@ -7,6 +7,7 @@ use App\Models\detallepedido;
 use App\Models\Pedido;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
@@ -17,8 +18,29 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::all();
-        $detPedido = detallepedido::all();
+        $query ="SELECT 
+                    p.ped_codigo,
+                    CONCAT(ped_cliente,' - ',c.cli_nombre) AS ped_cliente ,
+                    p.ped_vlrtotal,
+                    p.ped_fecha
+                    
+                FROM pedido p
+                
+                LEFT JOIN cliente c ON (c.cli_codigo=p.ped_cliente) 
+                where 1=1";
+        $pedidos = DB::select($query);
+
+        $sqlDep=" SELECT 
+                    dp.ped_codigo,
+                    dp.ped_cantidad,
+                    dp.ped_vlruni,        
+                    CONCAT(dp.id_producto,' - ',pr.pro_nombre) AS producto
+                    FROM detallepedido dp
+                    LEFT JOIN producto pr ON (pr.pro_codigo=dp.id_producto)
+                    WHERE 1=1 ";
+        $detPedido = DB::select($sqlDep);
+        $detPedido = json_encode($detPedido);
+        
         return view("modulos.pedido.index",compact('pedidos','detPedido'));
     }
 
@@ -82,7 +104,10 @@ class PedidoController extends Controller
      */
     public function show($id)
     {
+       
+
         //
+        
     }
 
     /**
