@@ -22,6 +22,7 @@
         </div>
     </form>
 
+    
     <div class="card card-primary">
         <div class="card-body">
             <table class="table table-hover table-responsive">
@@ -31,6 +32,7 @@
                         <th>nombre</th>
                         <th>descripcion</th>
                         <th>precio</th>
+                        <th>Accion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,13 +43,12 @@
                             <td>{{$mat['pro_nombre']}}</td>
                             <td>{{$mat['pro_descripcion']}}</td>
                             <td>{{$mat['pro_precio']}}</td>
+                            <td><a href="{{route('producto.edit',$mat['pro_codigo'])}}" class="btn btn-warning" id="">Editar</button></td>
                         </tr>
                     @endforeach
                 </tbody>
                 
             </table>
         </div>
-
-        
     </div>
 @endsection

@@ -3,8 +3,8 @@
 @section('title','home')
 
 @section('content')
-    <div class="card">
-        <div class="card-header">
+    <div class="card text-center">
+        <div class="card-header ">
             <h1>Bienvenido al ERP</h1>
         </div>
 

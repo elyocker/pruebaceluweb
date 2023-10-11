@@ -67,7 +67,16 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $query = "SELECT 
+                    pro_codigo,
+                    pro_nombre,
+                    pro_descripcion, 
+                    pro_precio
+                FROM producto 
+                where pro_codigo='$id' ";
+        $producto= DB::select($query);
+       
+        return view("modulos.producto.edit",compact('producto'));
     }
 
     /**
@@ -77,9 +86,33 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $producto)
     {
-        //
+        $query = "SELECT 
+                    pro_nombre,
+                    pro_descripcion, 
+                    pro_precio
+                FROM producto 
+                where pro_codigo='$producto' ";
+        $resProdu= DB::select($query);
+
+        $pro_nombre= $request->input('pro_nombre');
+        $pro_descripcion= $request->input('pro_descripcion');
+        
+        $pro_precio= $request->input('pro_precios');
+        $pro_preciorig= $resProdu[0]->pro_precio;
+      
+        $up="UPDATE producto SET 
+                                pro_nombre='$pro_nombre',
+                                pro_descripcion='$pro_descripcion',
+                                pro_precio='$pro_precio',
+                                pro_preciorig='$pro_preciorig'        
+                WHERE pro_codigo='$producto'";
+        DB::update($up);        
+        
+        session()->flash('status','Success');
+
+        return redirect()->route('producto.index');
     }
 
     /**

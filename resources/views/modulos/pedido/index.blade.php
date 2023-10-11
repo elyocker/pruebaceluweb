@@ -63,6 +63,7 @@
                     <tr>
                         <th>Pedido</th>
                         <th>Cliente</th>
+                        <th>Descuento</th>
                         <th>Valor total</th>
                         <th>Fecha</th>
                         <th>Detalle</th>
@@ -73,6 +74,7 @@
                         <tr>                            
                             <td>{{$ped->ped_codigo}}</td>
                             <td>{{$ped->ped_cliente}}</td>
+                            <td>{{$ped->ped_descuento}}%</td>
                             <td>{{$ped->ped_vlrtotal}}</td>
                             <td>{{$ped->ped_fecha}}</td>
                             <td>
@@ -106,14 +108,7 @@
                                 <th>Valor unitario</th>
                             </tr>
                         </thead>
-                        <tbody id="body_detalle">
-                            {{-- @foreach ($collection as $item)
-                                <tr>
-                                    <td>January</td>
-                                    <td>$100</td>
-                                </tr>
-                                
-                            @endforeach --}}
+                        <tbody id="body_detalle">                            
                         </tbody>
                     
                     </table>

@@ -17,7 +17,7 @@ class CreateProductoTable extends Migration
             $table->id("pro_codigo")->unique();
             $table->string("pro_nombre",500)->nullable();
             $table->string("pro_descripcion",500)->nullable();
-            $table->string("pro_precio",500)->nullable();
+            $table->string("pro_precio",500)->nullable();            
             $table->timestamps();
         });
     }

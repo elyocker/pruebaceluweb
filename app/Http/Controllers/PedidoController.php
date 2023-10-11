@@ -22,7 +22,8 @@ class PedidoController extends Controller
                     p.ped_codigo,
                     CONCAT(ped_cliente,' - ',c.cli_nombre) AS ped_cliente ,
                     p.ped_vlrtotal,
-                    p.ped_fecha
+                    p.ped_fecha,
+                    COALESCE(p.ped_descuento,0)as ped_descuento
                     
                 FROM pedido p
                 
@@ -74,14 +75,27 @@ class PedidoController extends Controller
         $pedidos =$request->all();
         $pedidos =$request->except('_token');
         
+        
+        $fechaActual =date('Y-m-d');
+        
+        $res = DB::select("SELECT COUNT(*)  as contador 
+                    FROM pedido 
+                    WHERE 1=1 AND ped_cliente='".$pedidos['ped_cliente']."'
+                    AND ped_fecha BETWEEN CURRENT_DATE-90 AND '$fechaActual' ");
+                    
+        $descuento =($res[0]->contador >= 5) ? 10: 0;
+        
+        
         $ped = New Pedido();
         $ped->ped_cliente = $pedidos['ped_cliente'];
-        $ped->ped_vlrtotal =  $pedidos['ped_total'];
+        $ped->ped_vlrtotal =  ($pedidos['ped_total'] - (($pedidos['ped_total'] * $descuento)/100));
         $ped->ped_fecha = date('Y-m-d');
+        $ped->ped_descuento = $descuento;
         $ped->save();
-
+        
+        
         $numeroPedido= Pedido::select('ped_codigo')->orderBy('ped_codigo', 'desc')->first();
-        $valor_total=0;
+        print_r($numeroPedido);
         $det_ped=array();
         for ($i=1; $i <= $pedidos['ped_contador']; $i++) { 
             $det_ped['ped_codigo']=$numeroPedido->ped_codigo;
